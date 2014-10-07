@@ -8,7 +8,7 @@ require_relative 'helpers/application'
 require_relative 'data_mapper_setup'
 
 enable :sessions
-set :session_secret, 'super secret'
+set :session_secret, 'my unique encryption key!'
 use Rack::Flash
 
 	get '/' do
@@ -36,6 +36,22 @@ use Rack::Flash
 		erb :"users/new"
 	end
 
+	get '/sessions/new' do
+		erb :"sessions/new"
+	end
+
+	post '/sessions' do
+		email, password = params[:email], params[:password]
+		user = User.authenticate(email, password)
+		if user
+		  session[:user_id] = user.id
+		  redirect to ('/')
+		else
+		  flash[:errors] = ["The email or password is incorrect"]
+		  erb :"sessions/new"
+		end
+	end
+
 	post '/users' do
 	  @user = User.new(:email => params[:email],
 	  			  :password => params[:password],
@@ -46,6 +62,7 @@ use Rack::Flash
 	  else
 	  	flash.now[:errors] = @user.errors.full_messages
 	  	erb :"users/new"
-	  end
-	  	
+		end 	
 	end
+
+
