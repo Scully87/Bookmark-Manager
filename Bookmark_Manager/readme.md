@@ -1,9 +1,9 @@
 Bookmark Manager
 =====================
 
-##### This is our Week 4 [Makers Academy](https://www.makersacademy.com) project where we will be introducing the use of Relational Databases.
+#### This is our Week 4 [Makers Academy](https://www.makersacademy.com) project where we will be introducing the use of Relational Databases.
 
-###### The main goals of bookmark manager:
+##### The main goals of bookmark manager:
 
 - User can sign up with email and password that is stored in the database
 - User can sign in with email and password retrieved from database
